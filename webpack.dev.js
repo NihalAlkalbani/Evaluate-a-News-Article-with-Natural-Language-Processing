@@ -1,14 +1,22 @@
+
 const webpack = require("webpack"),
 path = require("path"),
 HtmlWebpackPlugin = require("html-webpack-plugin"),
-{
-    CleanWebpackPlugin
-} = require('clean-webpack-plugin');
+{CleanWebpackPlugin} = require("clean-webpack-plugin"),
+CssMininizerPlugin = require("css-minimizer-webpack-plugin"),
+TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
     entry: "./src/index.js",
     mode: "development",
     devtool: 'source-map',
+    output: {
+        filename: 'boss.js',
+        path: path.resolve(__dirname, "dist"),
+        libraryTarget: 'var',
+        library: 'Client',
+        clean: true,
+    },
     module: {
         rules: [
             {
@@ -22,13 +30,6 @@ module.exports = {
             }
         ]
     },
-    output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist'),
-        libraryTarget: 'var',
-        library: 'Client',
-        clean: true,
-    },
     plugins: [new HtmlWebpackPlugin({
         template: "./src/client/views/index.html",
         filename: "./index.html"
@@ -39,5 +40,12 @@ module.exports = {
         cleanStaleWebpackAssets: true,
         protecWebpackAssete: false,
     }),
-],
+    ],
+    optimization: {
+            minimizer: [
+                new CssMininizerPlugin(),
+                new TerserPlugin()
+            ],
+            minimize: true,
+    },
 };

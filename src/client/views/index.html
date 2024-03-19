@@ -24,21 +24,24 @@
 
         <main>
             <section>
-                <form class="" onsubmit="return handleSubmit(event)">
-                    <input id="name" type="text" name="input" value="" onblur="onBlur()" placeholder="Name">
-                    <input type="submit" name="" value="submit" onclick="return handleSubmit(event)" onsubmit="return handleSubmit(event)">
+                <form class="" onsubmit="return Client.handleSubmit(event)" id="form" method="post">
+                    <input id="name" type="text" name="input" value placeholder="Name">
+                    <input type="submit" id="submit" value="submit" onsubmit="return handleSubmit(event)">
                 </form>
             </section>
 
             <section>
+                <p id="error"></p>
+            </section>
+
+            <section id="results">
                 <strong>Form Results:</strong>
-                <div id="results"></div>
+                <div id="agreement"></div>
+                <div id="subjectivity"></div>
+                <div id="confidence"></div>
+                <div id="irony"></div>
+                <div id="score_tag"></div>
             </section>
         </main>
-
-        <footer>
-            <p>This is a footer</p>
-        </footer>
-
     </body>
 </html>
